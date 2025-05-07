@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funciones de Escala y Crecimiento Exponencial</title>
+  <link rel="stylesheet" href="styles.css" />
+
+
+  <!-- Polyfill para navegadores antiguos -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <!-- Configuración de MathJax -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+
+  <!-- Script de MathJax -->
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Google Code Prettify para resaltar sintaxis -->
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <style>
+    .prettyprint {
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="seccion1.html">Introducción</a>
+    <a href="seccion2.html">Matemáticas Victoriana</a>
+    <a href="seccion3.html">Paradojas Lógicas</a>
+    <a href="seccion4.html">Funciones de Escala</a>
+    <a href="seccion5.html">Geometrías No Euclidianas</a>
+    <a href="seccion6.html">Personajes Matemáticos</a>
+    <a href="seccion7.html">Humor Matemático</a>
+    <a href="seccion8.html">Conclusiones</a>
+  </nav>
+
+  <div class="container">
+    <h1>Funciones de Escala y Crecimiento Exponencial</h1>
+
+    <div class="section">
+      <div class="subsection">
+        <h3>Alicia y los Cambios de Tamaño: Modelando la Escala con Octave</h3>
+
+        <p><strong>Enunciado del problema.</strong> Alicia experimenta cambios de tamaño tras ingerir sustancias mágicas. Su altura $h(t)$ se modela como:</p>
+        $$
+        h(t) = h_0\,e^{kt},
+        $$
+        donde $h_0$ es la altura inicial en $t=0$ y $k$ la tasa de crecimiento (positiva o negativa). Se pide:
+        <ol>
+          <li>Hallar $k$ si a los $T$ minutos la altura es $h(T)$.</li>
+          <li>Graficar $h(t)$ en $t\in[0,T]$.</li>
+        </ol>
+
+        <p><strong>Resolución.</strong></p>
+        $$
+        h(T) = h_0 e^{kT} \Rightarrow k = \frac{1}{T}\ln\left(\frac{h(T)}{h_0}\right).
+        $$
+        Así,
+        $$
+        h(t) = h_0\exp\left(\tfrac{t}{T}\ln\tfrac{h(T)}{h_0}\right).
+        $$
+
+        <p>El siguiente bloque contiene el código en Octave para calcular y graficar $h(t)$:</p>
+
+        <pre class="prettyprint lang-matlab">
+// Parámetros
+h0 = 1.2;      % Altura inicial (m)
+hT = 2.4;      % Altura a tiempo T (m)
+T  = 5;        % Tiempo final (minutos)
+
+// Cálculo de k
+k = (1/T) * log(hT / h0);
+
+// Vector de tiempo
+t = linspace(0, T, 100);
+
+// Modelo exponencial
+h = h0 * exp(k * t);
+
+// Graficar
+figure;
+plot(t, h, 'LineWidth', 2);
+xlabel('Tiempo (minutos)');
+ylabel('Altura (m)');
+title('Crecimiento Exponencial de Alicia');
+grid on;
+
+// Guardar figura
+print('alicia_crecimiento.png', '-dpng');
+        </pre>
+
+        <figure>
+          <img src="alicia_crecimiento.png" alt="Gráfico de crecimiento exponencial de Alicia" />
+          <figcaption>Ejemplo de gráfico generado con Octave: Altura de Alicia en función del tiempo.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geometrías No Euclidianas en el País de las Maravillas</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Polyfill para navegadores antiguos -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <!-- Configuración de MathJax -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+
+  <!-- Script de MathJax -->
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Google Code Prettify para resaltar sintaxis -->
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <style>
+    .prettyprint {
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="seccion1.html">Introducción</a>
+    <a href="seccion2.html">Matemáticas Victoriana</a>
+    <a href="seccion3.html">Paradojas Lógicas</a>
+    <a href="seccion4.html">Funciones de Escala</a>
+    <a href="seccion5.html">Geometrías No Euclidianas</a>
+    <a href="seccion6.html">Personajes Matemáticos</a>
+    <a href="seccion7.html">Humor Matemático</a>
+    <a href="seccion8.html">Conclusiones</a>
+  </nav>
+
+  <div class="container">
+    <h1>Geometrías No Euclidianas en el País de las Maravillas</h1>
+
+    <div class="section">
+      <h2>El Jardín de la Reina: Hipótesis Hiperbólica en el Diseño del Espacio</h2>
+      
+      <p>En Wonderland, los jardines parecen expandirse sin límite. Modelaremos este fenómeno asumiendo un espacio hiperbólico de curvatura constante $K=-1/R^2$. Usaremos el modelo del disco de Poincaré: todo punto $z\in\mathbb{C}$ con $|z|<1$. La distancia hiperbólica entre $z_1$ y $z_2$ es:</p>
+      
+      $$
+      d_H(z_1,z_2) = R\;\mathrm{arcosh}\!\Bigl(1 + 2\frac{|z_1 - z_2|^2}{(1 - |z_1|^2)(1 - |z_2|^2)}\Bigr)
+      $$
+
+      <div class="subsection">
+        <h3>Tres Problemas en Espacios Curvos</h3>
+        
+        <div class="problem">
+          <h4>Problema 1. Suma de ángulos en un triángulo hiperbólico</h4>
+          <p>Sea un triángulo con vértices $z_1,z_2,z_3\in\{|z|<1\}$. Las longitudes de los lados son:</p>
+          $$
+          a = d_H(z_2,z_3),\quad b = d_H(z_1,z_3),\quad c = d_H(z_1,z_2)
+          $$
+          <p>Por la ley de los cosenos hiperbólica:</p>
+          $$
+          \cosh\!\bigl(a/R\bigr) = \cosh\!\bigl(b/R\bigr)\cosh\!\bigl(c/R\bigr) - \sinh\!\bigl(b/R\bigr)\sinh\!\bigl(c/R\bigr)\cos\alpha
+          $$
+          <p>La suma de ángulos satisface:</p>
+          $$
+          \alpha + \beta + \gamma = \pi - \delta,\quad \delta>0\quad(\text{defecto hiperbólico})
+          $$
+        </div>
+
+        <div class="problem">
+          <h4>Problema 2. Longitud de geodésicas</h4>
+          <p>Una geodésica entre $z_1$ y $z_2$ en el disco de Poincaré es el arco de círculo ortogonal a la frontera. Su longitud coincide con $d_H(z_1,z_2)$ definido arriba.</p>
+        </div>
+
+        <div class="problem">
+          <h4>Problema 3. Escala percibida y curvatura espacial</h4>
+          <p>El factor de escala en un punto $z$ es:</p>
+          $$
+          \lambda(z) = \frac{2R}{1 - |z|^2}
+          $$
+          <p>El área de un pequeño elemento euclídeo $dA_e$ se relaciona con el área hiperbólica $dA_H$ por:</p>
+          $$
+          dA_H = \lambda(z)^2 \, dA_e
+          $$
+        </div>
+      </div>
+
+      <h3>Código en Octave (embebido)</h3>
+      <pre class="prettyprint lang-matlab">
+// Parámetros
+R = 1;  % Radio de curvatura
+% Puntos en el disco de Poincaré
+z1 = 0.2 + 0.1i;
+z2 = -0.3 + 0.2i;
+z3 = 0.1 - 0.4i;
+
+// Función distancia hiperbólica
+dH = @(z,w) R * acosh(1 + 2 * abs(z-w)^2 / ((1-abs(z)^2)*(1-abs(w)^2)));
+
+// Lados
+a = dH(z2,z3);
+b = dH(z1,z3);
+c = dH(z1,z2);
+
+// Ley de cosenos hiperbólica para ángulo en z1
+alpha = acos( (cosh(a/R)*cosh(b/R) - cosh(c/R)) / (sinh(a/R)*sinh(b/R)) );
+beta  = acos( (cosh(a/R)*cosh(c/R) - cosh(b/R)) / (sinh(a/R)*sinh(c/R)) );
+gamma = pi - (alpha + beta);
+
+// Defecto
+delta = pi - (alpha + beta + gamma);
+
+// Escala en z1
+lambda_z1 = 2*R/(1 - abs(z1)^2);
+
+// Salida
+fprintf('Ángulos: α=%.3f, β=%.3f, γ=%.3f\n',alpha, beta, gamma);
+fprintf('Defecto hiperbólico δ=%.3f\n', delta);
+fprintf('Factor de escala en z1: λ=%.3f\n', lambda_z1);
+      </pre>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personajes como Representaciones Matemáticas</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  
+  <!-- Polyfill para navegadores antiguos -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <!-- Configuración de MathJax -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+
+  <!-- Script de MathJax -->
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Google Code Prettify para resaltar sintaxis -->
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <style>
+    .prettyprint {
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="seccion1.html">Introducción</a>
+    <a href="seccion2.html">Matemáticas Victoriana</a>
+    <a href="seccion3.html">Paradojas Lógicas</a>
+    <a href="seccion4.html">Funciones de Escala</a>
+    <a href="seccion5.html">Geometrías No Euclidianas</a>
+    <a href="seccion6.html">Personajes Matemáticos</a>
+    <a href="seccion7.html">Humor Matemático</a>
+    <a href="seccion8.html">Conclusiones</a>
+  </nav>
+
+  <div class="container">
+    <h1>Personajes como Representaciones Matemáticas</h1>
+
+    <div class="section">
+      <h2>El Sombrerero Loco: Series Infinitas y Tiempo No Lineal</h2>
+      
+      <p>El Sombrerero Loco rompe la linealidad temporal mediante ciclos repetitivos crecientes: modelaremos su percepción temporal como la serie infinita alternante:</p>
+      
+      $$
+      T_N = \sum_{n=1}^N (-1)^{n+1}\frac{t_0}{n}
+      $$
+      
+      <p>que converge condicionalmente. Su dimensión no lineal del tiempo se evidencia en que:</p>
+      
+      $$
+      \lim_{N\to\infty}T_N = t_0\ln(2)
+      $$
+
+      <div class="subsection">
+        <h3>La Oruga Azul: Escalado y Transformaciones Lineales</h3>
+        
+        <p>La Oruga Azul modifica su tamaño según una transformación lineal en $\mathbb{R}^2$. Sea $\mathbf{v}_0$ su vector dimensión inicial y $S\in M_{2\times2}(\mathbb{R})$ la matriz de escala. Entonces:</p>
+        
+        $$
+        \mathbf{v} = S\,\mathbf{v}_0
+        $$
+      </div>
+
+      <h3>Código en Octave (embebido)</h3>
+      <pre class="prettyprint lang-matlab">
+// Factor de escala
+k = 1.5;
+// Vector dimensión inicial [altura; anchura]
+v0 = [1.2; 0.4];
+// Matriz de escala
+S = [k 0; 0 k];
+// Vector escalado
+v = S * v0;
+// Mostrar resultado
+fprintf('Dimensiones escaladas: altura=%.2f m, anchura=%.2f m\n', v(1), v(2));
+      </pre>
+    </div>
+  </div>
+</body>
+</html>
